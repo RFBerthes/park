@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Teste de atualização dinâmica do site.</title>
+        <style>
+            .name {
+                font-size: xx-large;
+                color: blue;
+                font-family: cursive;
+                margin-right: 2em;
+                width: 300px;
+                text-align: right;
+                display: inline-block;
+            }
+            .points {
+                font-size: xx-large;
+                font-family: monospace;
+                color: red;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="formulario">
+            <button type="button" id="sorteio">Sorteio!</buton>
+        </div>
+        <div id="resultado"></div>
+
+        <!-- scripts -->
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+        	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        	crossorigin="anonymous"></script>
+
+        <script>
+            $('#sorteio').click(function() { start_sorteio() })
+
+            function start_sorteio() {
+                $('#resultado').empty()
+                $.ajax('script.php', {
+                    cache: false,
+                    method: "GET",
+                    error: function (req, status, error) {
+                                alert(error)
+                            },
+                    success: function (data) {
+                                $.each(JSON.parse(data),
+                                       function(k, v) {
+                                           process(v.nome, v.pontos)
+                                       })
+                            }
+                })
+            }
+
+
+            function process(nome, pontos) {
+                var p = $('<p>')
+
+                var name = $('<b>').text(nome)
+                name.addClass('name')
+
+                var points = $('<tt>').text(pontos)
+                points.addClass('points')
+
+                p.append(name)
+                p.append(points)
+
+                $('#resultado').append(p)
+            }
+        </script>
+    </body>
+</html>
