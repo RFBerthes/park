@@ -1,15 +1,8 @@
 <?php
-include_once("conexao.php");
+include("connection.php");
+
 session_start();
-// puxar produtos do banco
-$consulta1 = "SELECT * FROM `usuarios`";
-$consulta2 = "SELECT * FROM `mesas`";
-$consulta3 = "SELECT * FROM `sabores`";
-$consulta4 = "SELECT * FROM `bebidas`";
-$result_usuarios = mysqli_query($conexao, $consulta1) or die($conexao->error);
-$result_mesas = mysqli_query($conexao, $consulta2) or die($conexao->error);
-$result_sabores = mysqli_query($conexao, $consulta3) or die($conexao->error);
-$result_bebidas = mysqli_query($conexao, $consulta4) or die($conexao->error);
+
 
 ?>
 <!doctype html>

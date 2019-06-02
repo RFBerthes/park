@@ -1,56 +1,37 @@
 <?php
-    require 'database_functions.php';
-    $databasename = "park";
-    $conn = connect_to_database($databasename);
+    require 'connection.php';
+    $pdo = getConnection();
 
-    echo "connect";
-
-    exit;
     //Recebendo dados do login
-    //$login = $_POST["usuario"];
-    //$senha   = $_POST["senha"];
-    $usuario = $pdo->mysqli_real_escape_string($_POST['usuario']);
-    $senha = $pdo->mysqli_real_escape_string($_POST['senha']);
-    //$senha = md5($_POST['senha']);
+    // resgata variáveis do formulário
+    $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : '';
+    $senha = isset($_POST['senha']) ? $_POST['senha'] : '';
+    $senhaHasch = make_hash($senha);
 
-    echo $usuario;
-    echo"<br>";
-    echo $senha;
-    exit;
-    $query = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND senha = '$senha'";
+    $sql = "SELECT * FROM usuarios WHERE nome = :nome AND senha = :senha";
+    $stmt = $pdo->prepare($sql);
 
-    //Consultar o banco de dados para uso
-    $result = $pdo->mysqli_query($query);
-    //Isolar Perfil
-    $dados = $result->fetch_assoc();
+    $stmt->bindParam(':nome', $usuario);
+    $stmt->bindParam(':senha', $senha);
 
-    //verificar quantas linha a query retornou (0 não encontrou | 1 encontrou)
-    $row = mysqli_num_rows($result);
+    $stmt->execute();
+    $usuarios = $stmt->fetchAll();
 
-    if ($row == 0){
-        //trata usuário ou senha inválidos
+    if (count($usuarios) <= 0)
+    {
         header('location: index.php?erro');
-                
-    }elseif ($row == 1){
-        //trata encontrado
-        switch ($dados['perfil']) {
-            case "admin":
-                header("Location: admin.php");
-                session_start();
-                $_SESSION['idusuario'] = $dados['idusuario'];
-                exit();
-                break;
-
-            case "funcionario":
-                header("Location: funcionario.php");
-                session_start();
-                $_SESSION['idusuario'] = $dados['idusuario'];
-                exit();
-                break;
-
-            default;
-                //trata usuário com perfil inválido
-                header('location: index.php?erro');
-                break;
-        }
+        exit;
+    }else{
+    
+        // pega o primeiro usuário
+        $user = $usuarios[0];
+        
+        session_start();
+        $_SESSION['logged_in'] = true;
+        $_SESSION['idusuario'] = $usuario['idusuario'];
+        $_SESSION['nome'] = $usuario['nome'];
+        
+        header('Location: admin.php');
     }
+
+    ?>
