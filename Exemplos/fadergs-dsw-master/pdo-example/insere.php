@@ -36,10 +36,9 @@ try {
         } else {
             $stmt_ins->execute($dados);
         }
-        header("Location: lista.php");
+        header("Location: clientes.php?sucesso");
     } else {
-        echo "<p>Got no SEARCH results...</p>";
-        echo "<p>Erro no SEARCH.</p>";
+        header("Location: clientes.php?erro");
         exit();
     }
 } catch (Exception $e) {

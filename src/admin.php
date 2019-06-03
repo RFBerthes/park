@@ -1,7 +1,8 @@
 <?php
-include("connection.php");
+  include('database_functions.php');
 
-session_start();
+  $pdo = connect_to_database("park");
+  session_start();
 
 
 ?>

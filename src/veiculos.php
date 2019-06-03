@@ -1,12 +1,13 @@
 <?php
-    include("connection.php");
-    session_start();
-    // puxar produtos do banco
-    $sql1 = "SELECT * FROM veiculos";
-    $sql2 = "SELECT * FROM clientes";
+  session_start();
+  include('database_functions.php');
 
-    $veiculos = $pdo->query($sql1);
-    $clientes = $pdo->query($sql2);
+  $pdo = connect_to_database("park");
+
+  $sql1 = "SELECT * FROM veiculos";
+  $sql2 = "SELECT * FROM clientes";
+  $veiculos = $pdo->query($sql1);
+  $clientes = $pdo->query($sql2);
 
 ?>
     <!doctype html>
@@ -20,10 +21,10 @@
         <div class="container bg-dark text-white mt-2 mb-2 pb-2">
 
             <div class="pull-right">
-                <button type="button" class="btn btn-xs btn-success mt-2 mb-2" data-toggle="modal" data-target="#ModalNovoVeic">Novo Cliente</button>
+                <button type="button" class="btn btn-xs btn-success mt-2 mb-2" data-toggle="modal" data-target="#ModalNovoVeic">Novo Veículo</button>
             </div>
 
-            <!-- Inicio Modal Cliente -->
+            <!-- Inicio Modal Veiculo -->
             <div class="modal fade text-dark" id="ModalNovoVeic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -43,15 +44,47 @@
                                 </div>
                                 <div class="form-group">
                                   <label>Placa</label>
-                                    <input type="text" name="placa" id="placa" maxlength="8">
+                                  <input type="text" id="placa" name="placa" required class="form-control" placeholder="Placa" maxlength="8">
                                 </div>
                                 <div class="form-group">
                                   <label>Marca</label>
-                                  <select name="marca" id="marca">
-                                    <option value=""></option>
-
+                                  <select name="marca" id="marca" class="form-control">
+                                      <option value="Branco">Branco</option>
+                                      <option value="Prata">Prata</option>
+                                      <option value="Preto">Preto</option>
+                                      <option value="Azul">Azul</option>
+                                      <option value="Vermelho">Vermelho</option>
+                                      <option value="Amarelo">Amarelo</option>
+                                      <option value="Marrom">Marrom</option>
+                                      <option value="Verde">Verde</option>
+                                      <option value="Bordô">Bordô</option>
                                   </select>
                                 </div>
+                                <div class="form-group">
+                                    <label>Modelo</label>
+                                    <select name="modelo" id="modelo" class="form-control">
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Cor</label>
+                                    <select name="cor" id="cor" class="form-control">
+                                        <option value="CHEVROLET">CHEVROLET</option>
+                                        <option value="FIAT">FIAT</option>
+                                        <option value="VOLKSWAGEN">VOLKSWAGEN</option>
+                                        <option value="FORD">FORD</option>
+                                        <option value="RENAULT">RENAULT</option>
+                                        <option value="HYUNDAI">HYUNDAI</option>
+                                        <option value="TOYOTA">TOYOTA</option>
+                                        <option value="HONDA">HONDA</option>
+                                        <option value="CITROËN">CITROËN</option>
+                                        <option value="AUDI">AUDI</option>
+                                        <option value="PEUGEOT">PEUGEOT</option>
+                                        <option value="NISSAN">NISSAN</option>
+                                    </select>
+                                </div>
+
+                                
 
                                 <div class="form-group" style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
                                     <button type="submit" class="btn btn-primary btn-block mb-3" style="width:25%;"> Salvar </button>
@@ -66,7 +99,7 @@
                 <!-- Início Table -->
     <div class="table-responsive-sm ">
       <div class="col-md-12">
-        <h3 style="text-align:center">CLIENTES</h3>
+        <h3 style="text-align:center">VEÍCULOS</h3>
         <table class="table bg-light table-striped" style="text-align:center">
           <thead>
             <tr>

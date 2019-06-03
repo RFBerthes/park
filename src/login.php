@@ -1,6 +1,7 @@
 <?php
-    require 'connection.php';
-    $pdo = getConnection();
+    include('database_functions.php');
+
+    $pdo = connect_to_database("park");
 
     //Recebendo dados do login
     // resgata variáveis do formulário
