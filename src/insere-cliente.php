@@ -13,28 +13,27 @@ $pdo = connect_to_database("park");
 
 $sql_search = "SELECT nome FROM clientes WHERE nome = :nome";
 $stmt_search = $pdo->prepare($sql_search);
+$stmt_search->bindParam(':nome', $nome);
 
-$sql_ins = "INSERT INTO clientes (idcliente, nome) VALUES('', :nome)";
+$sql_ins = "INSERT INTO clientes (nome) VALUES(:nome)";
 $stmt_ins = $pdo->prepare($sql_ins);
+$stmt_ins->bindParam(':nome', $nome);
 
 try {
-    if ($stmt_search->execute(array(":nome"=>$nome))) {
-        $dados = array(
-            ":nome" => $nome,
-        );
+        $stmt_search->execute();
+
         if ($stmt_search->rowCount() > 0) {
             header("Location: clientes.php?erro");
+            exit();
         } else {
-            $stmt_ins->execute($dados);
+            $stmt_ins->execute();
             header("Location: clientes.php?sucesso");
         }
-    } else {
-        header("Location: clientes.php?erro");
-        exit();
-    }
+        
+    
 } catch (Exception $e) {
-    header("Location: clientes.php?erro");
-    exit();
+  echo "ERROR: ".$e->getMessage()."\n";
+  exit('\nOooops...');
 }
 
 ?>
