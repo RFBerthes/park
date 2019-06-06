@@ -3,13 +3,13 @@
 include('database_functions.php');
 
 //Recebendo dados 
-$idcliente = $_GET['idcliente'];
+$idclientes = $_GET['idclientes'];
 
 $pdo = connect_to_database("park");
 
-$sql_del = "DELETE FROM clientes WHERE idcliente = :idcliente";
+$sql_del = "DELETE FROM clientes WHERE idclientes = :idclientes";
 $stmt_del = $pdo->prepare($sql_del);
-$stmt_del->bindParam(':idcliente', $idcliente);
+$stmt_del->bindParam(':idclientes', $idclientes);
 
 try {
         $stmt_del->execute();

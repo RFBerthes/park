@@ -38,7 +38,7 @@
                                   <label>Cliente</label>
                                   <select name="cliente" id="cliente" class="form-control">
                                     <?php while ($row = $clientes->fetch()) { ?>
-                                      <option value="<?php echo $row['idcliente']; ?>"><?php echo $row['nome']; ?></option>
+                                      <option value="<?php echo $row['idclientes']; ?>"><?php echo $row['nome']; ?></option>
                                     <?php } ?>
                                   </select>
                                 </div>

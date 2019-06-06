@@ -24,15 +24,14 @@
           <li class="nav-item ">
             <a class="nav-link" href="admin.php" id="home">HOME <span class="sr-only">(página atual)</span></a>
           </li>
-          <li class="nav-item dropdown ">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              CADASTROS
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="veiculos.php">  VEÍCULOS    </a>
-              <a class="dropdown-item" href="clientes.php">  CLIENTES    </a>
-              <a class="dropdown-item" href="#">  USUÁRIOS    </a>
-            </div>
+          <li class="nav-item ">
+            <a class="nav-link" href="veiculos.php" id="home">VEÍCULOS <span class="sr-only">(página atual)</span></a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="clientes.php" id="home">CLIENTES <span class="sr-only">(página atual)</span></a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="usuarios.php" id="home">USUÁRIOS <span class="sr-only">(página atual)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">RELATÓRIOS</a>
@@ -40,22 +39,13 @@
           <li class="nav-item">
             <a class="nav-link disabled" href="#">BACKUP</a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="index.php">SAIR</a>
-          </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-
+          <li class="nav-item ">
+            <a class="nav-link" href="logout.php">SAIR</a>
+          </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-          <button class="btn btn-outline-success my-2 my-sm-0 bg-dark" type="submit">OK</button>
-        </form>
       </div>
     </nav>
-
-
-    </form>
-
     </div>
 </header>

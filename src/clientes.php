@@ -36,8 +36,10 @@
                                   <label>Nome</label>
                                   <input type="text" id="nome" name="nome" required class="form-control" placeholder="Nome" >
                                 </div>
-                            
-
+                                <div class="form-group">
+                                    <label>CPF</label>
+                                    <input type="text" id="cpf" name="cpf" class="form-control" placeholder="CPF" maxlength="11" >
+                                </div>
                                 <div class="form-group" style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
                                     <button type="submit" class="btn btn-primary btn-block mb-3" style="width:25%;"> Salvar </button>
                                 </div>
@@ -56,6 +58,7 @@
           <thead>
             <tr>
               <th>Nome</th>
+              <th>CPF</th>
               <th>Ação</th>
             </tr>
           </thead>
@@ -63,9 +66,10 @@
             <?php while ($row = $clientes->fetch()){ ?>
             <tr>
               <td><?php echo $row['nome']; ?></td>
+              <td><?php echo $row['cpf']; ?></td>
               <td>
                 <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $row['idcliente']; ?>" data-whatevernome="<?php echo $row['nome']; ?>" >Editar</button>
-                <a href="delete-cliente.php?idcliente=<?php echo $row['idcliente']; ?>"><button type="button"
+                <a href="delete-cliente.php?idclientes=<?php echo $row['idclientes']; ?>"><button type="button"
                     class="btn btn-xs btn-danger">Apagar</button></a>
               </td>
             </tr>
@@ -89,6 +93,10 @@
                   <div class="form-group">
                     <label>Nome</label>
                     <input type="text" id=recepient-nome name=nome required class="form-control" placeholder="Nome">
+                  </div>
+                  <div class="form-group">
+                      <label>CPF</label>
+                      <input type="text" id="cpf" name="cpf" class="form-control" placeholder="CPF" maxlength="11" >
                   </div>
                 <input type="hidden" id="recepient-idcliente" name="idcliente">
                 <div class="modal-footer">
