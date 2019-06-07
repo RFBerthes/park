@@ -4,7 +4,7 @@
 
   $pdo = connect_to_database("park");
 
-  $sql1 = "SELECT * FROM veiculos";
+  $sql1 = "SELECT nome, placa, marca, modelo, cor FROM veiculos JOIN clientes ON clientes.idclientes = veiculos.clientes_idclientes";
   $sql2 = "SELECT * FROM clientes";
   $veiculos = $pdo->query($sql1);
   $clientes = $pdo->query($sql2);
@@ -103,23 +103,19 @@
             <tr>
               <th>Cliente</th>
               <th>Placa</th>
-              <th>Marca</th>
-              <th>Modelo</th>
-              <th>Cor</th>
+              <th>Veiculo</th>
               <th>Ação</th>
             </tr>
           </thead>
           <tbody>
             <?php while ($row = $veiculos->fetch()){ ?>
             <tr>
-              <td><?php echo $row['clientes_idclientes']; ?></td>
-              <td><?php echo $row['placa']; ?></td>
-              <td><?php echo $row['marca']; ?></td>
-              <td><?php echo $row['modelo']; ?></td>
-              <td><?php echo $row['cor']; ?></td>
-              <td>
-                <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $row['placa']; ?>" >Editar</button>
-                <a href="delete-veic.php?placa=<?php echo $row['placa']; ?>"><button type="button" class="btn btn-xs btn-danger">Apagar</button></a>
+              <td class="align-middle"><?php echo $row['nome']; ?></td>
+              <td class="align-middle"><?php echo $row['placa']; ?></td>
+              <td class="align-middle"><?php echo $row['marca']; echo "<br>"; echo $row['modelo']; echo "<br>"; echo $row['cor'];?></td>
+              <td class="align-middle">
+                <button type="button" class="btn btn-xs btn-warning" style="width:70px" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $row['placa']; ?>" >Editar</button>
+                <a href="delete-veic.php?placa=<?php echo $row['placa']; ?>"><button type="button" class="btn btn-xs btn-danger" style="width:70px">Apagar</button></a>
               </td>
             </tr>
             <?php } ?>
