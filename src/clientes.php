@@ -68,9 +68,9 @@
               <td><?php echo $row['nome']; ?></td>
               <td><?php echo $row['cpf']; ?></td>
               <td>
-                <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $row['idcliente']; ?>" data-whatevernome="<?php echo $row['nome']; ?>" >Editar</button>
+                <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $row['idcliente']; ?>" data-whatevernome="<?php echo $row['nome']; ?>" > <img src="open-iconic/png/pencil-2x.png"> </button>
                 <a href="delete-cliente.php?idclientes=<?php echo $row['idclientes']; ?>"><button type="button"
-                    class="btn btn-xs btn-danger">Apagar</button></a>
+                    class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
               </td>
             </tr>
             <?php } ?>

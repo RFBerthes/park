@@ -1,8 +1,15 @@
 <?php
   include('database_functions.php');
+  session_start();
+  if((!isset ($_SESSION['nome']) == true)){
+    unset($_SESSION['nome']);
+    header('location:index.php');
+  }
+  $login =  $_SESSION['nome'];
+  
 
   $pdo = connect_to_database("park");
-  session_start();
+
 
 
 ?>
@@ -16,6 +23,10 @@
 </head>
 
 <body class="bg-dark text-white">
+<?php
+  echo $login;
+?>
+<i class="fas fa-user-edit"></i>
 
 
   <!-- Optional JavaScript -->

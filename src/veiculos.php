@@ -114,8 +114,9 @@
               <td class="align-middle"><?php echo $row['placa']; ?></td>
               <td class="align-middle"><?php echo $row['marca']; echo "<br>"; echo $row['modelo']; echo "<br>"; echo $row['cor'];?></td>
               <td class="align-middle">
-                <button type="button" class="btn btn-xs btn-warning" style="width:70px" data-toggle="modal" data-target="#editModal" data-whatever="<?php echo $row['placa']; ?>" >Editar</button>
-                <a href="delete-veic.php?placa=<?php echo $row['placa']; ?>"><button type="button" class="btn btn-xs btn-danger" style="width:70px">Apagar</button></a>
+              <span class="iconic iconic-star" title="star" aria-hidden="true"></span>
+                <button type="button" data-toggle="modal" class="btn btn-xs btn-warning"  data-target="#editModal" data-whatever="<?php echo $row['placa']; ?>" > <img src="open-iconic/png/pencil-2x.png"> </button>
+                <a href="delete-veic.php?placa=<?php echo $row['placa']; ?>"><button type="button" class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
               </td>
             </tr>
             <?php } ?>

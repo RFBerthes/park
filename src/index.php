@@ -24,7 +24,7 @@
               <form action="login.php" method="post" class="form-signin">
                 <div class="form-label-group">
                   <!-- <label for="usuario">Usuário</label> -->
-                  <input type="text" name="usuario" id="usuario" class="form-control mb-3" placeholder="Usuário" required autofocus>
+                  <input type="text" name="nome" id="nome" class="form-control mb-3" placeholder="Usuário" required autofocus>
                 </div>
                 <div class="form-label-group">
                   <!-- <label for="senha">Senha</label> -->

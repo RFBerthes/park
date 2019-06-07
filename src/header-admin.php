@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.css">
-
+  <link href="/open-iconic/font/css/open-iconic-foundation.css" rel="stylesheet">
 <!-- JavaScript -->
   <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 

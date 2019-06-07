@@ -5,34 +5,44 @@
 
     //Recebendo dados do login
     // resgata variáveis do formulário
-    $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : '';
-    $senha = isset($_POST['senha']) ? $_POST['senha'] : '';
+    $nome = $_POST['nome'];
+    $senha = $_POST['senha'];
     $senhaHasch = make_hash($senha);
 
     $sql = "SELECT * FROM usuarios WHERE nome = :nome AND senha = :senha";
-    $stmt = $pdo->prepare($sql);
+    $usuario = $pdo->prepare($sql);
 
-    $stmt->bindParam(':nome', $usuario);
-    $stmt->bindParam(':senha', $senha);
+    $usuario->bindParam(':nome', $nome);
+    $usuario->bindParam(':senha', $senha);
 
-    $stmt->execute();
-    $usuarios = $stmt->fetchAll();
+    $usuario->execute();
 
-    if (count($usuarios) <= 0)
-    {
-        header('location: index.php?erro');
-        exit;
-    }else{
     
-        // pega o primeiro usuário
-        $user = $usuarios[0];
-        
-        session_start();
-        $_SESSION['logged_in'] = true;
-        $_SESSION['idusuario'] = $usuario['idusuario'];
-        $_SESSION['nome'] = $usuario['nome'];
-        
-        header('Location: admin.php');
-    }
+
+    if ($usuario->rowCount() == 1)
+    {
+        //trata encontrado
+        $row = $usuario->fetch();
+        switch ($row['perfil']) {
+            case "Administrador":
+                session_start();
+                $_SESSION['nome'] = $nome;
+                header('Location: admin.php');
+                break;
+            case "Funcionário": 
+                session_start();
+                $_SESSION['nome'] = $nome;
+                header('Location: func.php');
+                exit();
+                break;
+            default;
+                //trata usuário com perfil inválido
+                header('location: index.php?erro');
+                break;
+    }   
+    }else{
+        //trata usuário ou senha inválidos
+        header('location: index.php?erro');
+    } 
 
     ?>

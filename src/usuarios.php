@@ -18,7 +18,7 @@
   <body>
       <div class="container bg-dark text-white mt-2 mb-2">
       <div class="pull-right">
-				<button type="button" class="btn btn-xs btn-success mt-2 mb-2" data-toggle="modal" data-target="#myModalcad">Cadastrar</button>
+				<button type="button" class="btn btn-xs btn-success mt-2 mb-2" data-toggle="modal" data-target="#myModalcad">Novo Usuário</button>
 			</div>
 			<!-- Inicio Modal -->
 			<div class="modal fade text-dark" id="myModalcad" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -33,8 +33,8 @@
                   <div class="form-group">
                     <label>Perfil</label>
                     <select name="perfil" id="perfil" class="form-control">
-                        <option value="admin">Administrador</option>
-                        <option value="func" selected>Funcionário</option>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Funcionário" selected>Funcionário</option>
                     </select>
                   </div>
   
@@ -60,7 +60,7 @@
         <!-- Table -->
         <div class="row">
             <div class="col-md-12">
-              <h3 style="text-align:center">Usuários</h3>
+              <h3 style="text-align:center">USUÁRIOS</h3>
               <table class="table bg-light table-striped" style="text-align:center">
                 <thead>
                   <tr>
@@ -75,8 +75,8 @@
                       <td><?php echo $row['perfil']; ?></td>
                       <td><?php echo $row['nome'];   ?></td>
                       <td>
-                        <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="<?php echo $row['idusuario']; ?>"  data-whateverperfil="<?php echo $row['perfil']; ?>"  data-whatevernome="<?php echo $row['nome']; ?>" >Editar</button>
-                        <a href="delete-usuario.php?idusuario=<?php echo $row['idusuario']; ?>"><button type="button" class="btn btn-xs btn-danger">Apagar</button></a>
+                        <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="<?php echo $row['idusuario']; ?>"  data-whateverperfil="<?php echo $row['perfil']; ?>"  data-whatevernome="<?php echo $row['nome']; ?>" > <img src="open-iconic/png/pencil-2x.png"> </button>
+                        <a href="delete-usuario.php?idusuario=<?php echo $row['idusuario']; ?>"><button type="button" class="btn btn-xs btn-danger">  <img src="open-iconic/png/trash-2x.png"> </button></a>
                       </td>
                     </tr>
                   <?php } ?>
