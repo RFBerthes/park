@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 06-Jun-2019 às 22:10
+-- Generation Time: 12-Jun-2019 às 23:52
 -- Versão do servidor: 10.1.39-MariaDB
 -- versão do PHP: 7.3.5
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `clientes` (
-  `idclientes` int(11) NOT NULL,
+  `idcliente` int(11) NOT NULL,
   `nome` varchar(45) DEFAULT NULL,
   `cpf` varchar(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -38,8 +38,9 @@ CREATE TABLE `clientes` (
 -- Extraindo dados da tabela `clientes`
 --
 
-INSERT INTO `clientes` (`idclientes`, `nome`, `cpf`) VALUES
-(2, 'Rafael Berthes', '02767475005');
+INSERT INTO `clientes` (`idcliente`, `nome`, `cpf`) VALUES
+(2, 'Rafael Berthes', '02767475005'),
+(3, 'DiÃ³genes Berthes', '43154655533');
 
 -- --------------------------------------------------------
 
@@ -73,7 +74,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idusuario`, `nome`, `senha`, `perfil`) VALUES
-(1, 'admin', 'admin', 'admin');
+(1, 'admin', 'admin', 'Administrador'),
+(3, 'admin2', 'admin2', 'Administrador'),
+(4, 'func', 'func', 'FuncionÃ¡rio');
 
 -- --------------------------------------------------------
 
@@ -97,14 +100,15 @@ CREATE TABLE `veiculos` (
   `marca` varchar(45) DEFAULT NULL,
   `modelo` varchar(45) DEFAULT NULL,
   `cor` varchar(45) DEFAULT NULL,
-  `clientes_idclientes` int(11) NOT NULL
+  `clientes_idcliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `veiculos`
 --
 
-INSERT INTO `veiculos` (`placa`, `marca`, `modelo`, `cor`, `clientes_idclientes`) VALUES
+INSERT INTO `veiculos` (`placa`, `marca`, `modelo`, `cor`, `clientes_idcliente`) VALUES
+('ABK1412', 'RENAULT', 'Clio', 'Preto', 3),
 ('ITG3555', 'HONDA', 'City', 'Branco', 2);
 
 --
@@ -115,7 +119,7 @@ INSERT INTO `veiculos` (`placa`, `marca`, `modelo`, `cor`, `clientes_idclientes`
 -- Indexes for table `clientes`
 --
 ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`idclientes`);
+  ADD PRIMARY KEY (`idcliente`);
 
 --
 -- Indexes for table `resgistros`
@@ -141,7 +145,7 @@ ALTER TABLE `vagas`
 --
 ALTER TABLE `veiculos`
   ADD PRIMARY KEY (`placa`),
-  ADD KEY `fk_veiculos_clientes1_idx` (`clientes_idclientes`);
+  ADD KEY `fk_veiculos_clientes1_idx` (`clientes_idcliente`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -151,7 +155,7 @@ ALTER TABLE `veiculos`
 -- AUTO_INCREMENT for table `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idclientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `resgistros`
@@ -163,7 +167,7 @@ ALTER TABLE `resgistros`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `vagas`
@@ -185,7 +189,7 @@ ALTER TABLE `resgistros`
 -- Limitadores para a tabela `veiculos`
 --
 ALTER TABLE `veiculos`
-  ADD CONSTRAINT `fk_veiculos_clientes1` FOREIGN KEY (`clientes_idclientes`) REFERENCES `clientes` (`idclientes`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_veiculos_clientes1` FOREIGN KEY (`clientes_idcliente`) REFERENCES `clientes` (`idcliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
