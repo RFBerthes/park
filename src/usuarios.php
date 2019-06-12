@@ -75,7 +75,7 @@
                       <td><?php echo $row['perfil']; ?></td>
                       <td><?php echo $row['nome'];   ?></td>
                       <td>
-                        <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="<?php echo $row['idusuario']; ?>"  data-whateverperfil="<?php echo $row['perfil']; ?>"  data-whatevernome="<?php echo $row['nome']; ?>" > <img src="open-iconic/png/pencil-2x.png"> </button>
+                        <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="<?php echo $row['idusuario']; ?>"  data-whateverperfil="<?php echo $row['perfil']; ?>"  data-whatevernome="<?php echo $row['nome']; ?>" data-whateversenha="<?php echo $row['senha']; ?>"  > <img src="open-iconic/png/pencil-2x.png"> </button>
                         <a href="delete-usuario.php?idusuario=<?php echo $row['idusuario']; ?>"><button type="button" class="btn btn-xs btn-danger">  <img src="open-iconic/png/trash-2x.png"> </button></a>
                       </td>
                     </tr>
@@ -97,23 +97,23 @@
                 
                       <div class="form-group">
                         <label>Perfil</label>
-                        <select name="perfil" id="perfil" class="form-control">
-                            <option value="admin">Administrador</option>
-                            <option value="func" selected>Funcionário</option>
+                        <select name="perfil" id="recipient-perfil" class="form-control">
+                            <option value="Administrador">Administrador</option>
+                            <option value="Funcionário" selected>Funcionário</option>
                         </select>
                       </div>
       
                       <div class="form-group">
                         <label>Nome</label>
-                        <input type="text" id=nome name=nome required class="form-control" placeholder="Nome">
+                        <input type="text" id="recipient-nome" name="nome" required class="form-control" placeholder="Nome">
                       </div>
      
                       <div class="form-group">
                         <label>Senha</label>
-                        <input class="form-control" id="senha" name="senha" required placeholder="Senha" type="password" minlength="4">
+                        <input class="form-control" id="recipient-senha" name="senha" required placeholder="Senha" type="password" minlength="4">
                       </div>
               
-                      <input type="hidden" id="recepient-idusuario" name="idusuario">
+                      <input type="hidden" id="recipient-idusuario" name="idusuario">
                       <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-danger">Alterar</button>
@@ -189,13 +189,15 @@
           var recipient = button.data('whatever') // Extract info from data-* attributes
           var recipientperfil = button.data('whateverperfil')
           var recipientnome = button.data('whatevernome')
+          var recipientsenha = button.data('whateversenha')
           // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
           // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
           var modal = $(this)
           modal.find('.modal-title').text('ID do Usuario: ' + recipient)
-          modal.find('#recepient-idusuario').val(recipient)
+          modal.find('#recipient-idusuario').val(recipient)
           modal.find('#recipient-perfil').val(recipientperfil)
-          modal.find('#recipient-name').val(recipientnome)
+          modal.find('#recipient-nome').val(recipientnome)
+          modal.find('#recipient-senha').val(recipientsenha)
         })
       </script>
   </body>

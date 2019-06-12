@@ -4,7 +4,7 @@
 
   $pdo = connect_to_database("park");
 
-  $sql1 = "SELECT nome, placa, marca, modelo, cor FROM veiculos JOIN clientes ON clientes.idclientes = veiculos.clientes_idclientes";
+  $sql1 = "SELECT nome, placa, marca, modelo, cor FROM veiculos JOIN clientes ON clientes.idcliente = veiculos.clientes_idcliente";
   $sql2 = "SELECT * FROM clientes";
   $veiculos = $pdo->query($sql1);
   $clientes = $pdo->query($sql2);
@@ -38,7 +38,7 @@
                                   <label>Cliente</label>
                                   <select name="cliente" id="cliente" class="form-control">
                                     <?php while ($row = $clientes->fetch()) { ?>
-                                      <option value="<?php echo $row['idclientes']; ?>"><?php echo $row['nome']; ?></option>
+                                      <option value="<?php echo $row['idcliente']; ?>"><?php echo $row['nome']; ?></option>
                                     <?php } ?>
                                   </select>
                                 </div>

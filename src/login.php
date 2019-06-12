@@ -7,7 +7,6 @@
     // resgata variáveis do formulário
     $nome = $_POST['nome'];
     $senha = $_POST['senha'];
-    $senhaHasch = make_hash($senha);
 
     $sql = "SELECT * FROM usuarios WHERE nome = :nome AND senha = :senha";
     $usuario = $pdo->prepare($sql);
