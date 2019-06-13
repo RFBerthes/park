@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 13-Jun-2019 às 22:51
--- Versão do servidor: 10.1.39-MariaDB
--- versão do PHP: 7.3.5
+-- Host: localhost
+-- Tempo de geração: 14/06/2019 às 01:28
+-- Versão do servidor: 10.1.38-MariaDB
+-- Versão do PHP: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `park`
+-- Banco de dados: `park`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `clientes`
+-- Estrutura para tabela `clientes`
 --
 
 CREATE TABLE `clientes` (
@@ -35,17 +35,23 @@ CREATE TABLE `clientes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `clientes`
+-- Despejando dados para a tabela `clientes`
 --
 
 INSERT INTO `clientes` (`idcliente`, `nome`, `cpf`) VALUES
-(2, 'Rafael Berthes', '02767475005'),
-(3, 'DiÃ³genes Berthes', '43154655533');
+(2, 'Rafael Berthes', '02766772030'),
+(3, 'DiÃ³genes Berthes', '43154655533'),
+(4, 'Andey', '86203059533'),
+(5, 'JÃ©ssica Correia', '26274949300'),
+(6, 'Mario', '71729429920'),
+(7, 'Tony Stark', '52993828042'),
+(8, 'Steve Rogers', '67283920000'),
+(9, 'Barry Allen', '99922299933');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `registros`
+-- Estrutura para tabela `registros`
 --
 
 CREATE TABLE `registros` (
@@ -57,10 +63,18 @@ CREATE TABLE `registros` (
   `status` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Despejando dados para a tabela `registros`
+--
+
+INSERT INTO `registros` (`idregistro`, `entrada`, `saida`, `valor`, `veiculos_placa`, `status`) VALUES
+(1, '2019-06-13 22:47:32', '2019-06-13 22:49:41', '10.00', 'IKV8656', 'Pago'),
+(2, '2019-06-13 23:20:14', '2019-06-13 23:27:33', '35.00', 'ITG3555', 'Pago');
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Estrutura para tabela `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -71,18 +85,17 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `usuarios`
+-- Despejando dados para a tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`idusuario`, `nome`, `senha`, `perfil`) VALUES
 (1, 'admin', 'admin', 'Administrador'),
-(3, 'admin2', 'admin2', 'Administrador'),
 (4, 'func', 'func', 'FuncionÃ¡rio');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `vagas`
+-- Estrutura para tabela `vagas`
 --
 
 CREATE TABLE `vagas` (
@@ -93,7 +106,7 @@ CREATE TABLE `vagas` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `veiculos`
+-- Estrutura para tabela `veiculos`
 --
 
 CREATE TABLE `veiculos` (
@@ -105,89 +118,92 @@ CREATE TABLE `veiculos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `veiculos`
+-- Despejando dados para a tabela `veiculos`
 --
 
 INSERT INTO `veiculos` (`placa`, `marca`, `modelo`, `cor`, `clientes_idcliente`) VALUES
+('ABC1234', 'PEUGEOT', '207', 'BordÃ´', 6),
 ('ABK1412', 'RENAULT', 'Clio', 'Preto', 3),
+('IKV8656', 'CHEVROLET', 'Corsa', 'Branco', 4),
+('IRM666', 'AUDI', 'A3', 'Vermelho', 7),
 ('ITG3555', 'HONDA', 'City', 'Branco', 2);
 
 --
--- Indexes for dumped tables
+-- Índices de tabelas apagadas
 --
 
 --
--- Indexes for table `clientes`
+-- Índices de tabela `clientes`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`idcliente`);
 
 --
--- Indexes for table `registros`
+-- Índices de tabela `registros`
 --
 ALTER TABLE `registros`
   ADD PRIMARY KEY (`idregistro`),
   ADD KEY `fk_resgistros_veiculos1_idx` (`veiculos_placa`);
 
 --
--- Indexes for table `usuarios`
+-- Índices de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`idusuario`);
 
 --
--- Indexes for table `vagas`
+-- Índices de tabela `vagas`
 --
 ALTER TABLE `vagas`
   ADD PRIMARY KEY (`idvagas`);
 
 --
--- Indexes for table `veiculos`
+-- Índices de tabela `veiculos`
 --
 ALTER TABLE `veiculos`
   ADD PRIMARY KEY (`placa`),
   ADD KEY `fk_veiculos_clientes1_idx` (`clientes_idcliente`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
--- AUTO_INCREMENT for table `clientes`
+-- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `registros`
+-- AUTO_INCREMENT de tabela `registros`
 --
 ALTER TABLE `registros`
-  MODIFY `idregistro` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idregistro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `usuarios`
+-- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `vagas`
+-- AUTO_INCREMENT de tabela `vagas`
 --
 ALTER TABLE `vagas`
   MODIFY `idvagas` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Restrições para dumps de tabelas
 --
 
 --
--- Limitadores para a tabela `registros`
+-- Restrições para tabelas `registros`
 --
 ALTER TABLE `registros`
   ADD CONSTRAINT `fk_resgistros_veiculos1` FOREIGN KEY (`veiculos_placa`) REFERENCES `veiculos` (`placa`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `veiculos`
+-- Restrições para tabelas `veiculos`
 --
 ALTER TABLE `veiculos`
   ADD CONSTRAINT `fk_veiculos_clientes1` FOREIGN KEY (`clientes_idcliente`) REFERENCES `clientes` (`idcliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
