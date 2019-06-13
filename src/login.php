@@ -15,30 +15,17 @@
     $usuario->bindParam(':senha', $senha);
 
     $usuario->execute();
-
-    
+  
 
     if ($usuario->rowCount() == 1)
     {
         //trata encontrado
         $row = $usuario->fetch();
-        switch ($row['perfil']) {
-            case "Administrador":
-                session_start();
-                $_SESSION['nome'] = $nome;
-                header('Location: admin.php');
-                break;
-            case "Funcionário": 
-                session_start();
-                $_SESSION['nome'] = $nome;
-                header('Location: func.php');
-                exit();
-                break;
-            default;
-                //trata usuário com perfil inválido
-                header('location: index.php?erro');
-                break;
-    }   
+        session_start();
+        $_SESSION['nome'] = $row['nome'];
+        $_SESSION['perfil'] = $row['perfil'];
+        header('Location: inicial.php');
+
     }else{
         //trata usuário ou senha inválidos
         header('location: index.php?erro');

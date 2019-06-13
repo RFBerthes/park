@@ -30,15 +30,8 @@
         <li class="nav-item ">
           <a class="nav-link" href="clientes.php" id="home">CLIENTES <span class="sr-only">(página atual)</span></a>
         </li>
-        <li class="nav-item ">
-          <a class="nav-link" href="usuarios.php" id="home">USUÁRIOS <span class="sr-only">(página atual)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="relatorios.php">RELATÓRIOS</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">BACKUP</a>
-        </li>
+
+
       </ul>
 
       <ul class="navbar-nav ml-auto">

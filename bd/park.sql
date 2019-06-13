@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 13-Jun-2019 às 12:06
--- Versão do servidor: 10.1.40-MariaDB
+-- Generation Time: 13-Jun-2019 às 22:51
+-- Versão do servidor: 10.1.39-MariaDB
 -- versão do PHP: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -53,16 +53,9 @@ CREATE TABLE `registros` (
   `entrada` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `saida` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `valor` decimal(10,2) DEFAULT NULL,
-  `veiculos_placa` varchar(7) NOT NULL
+  `veiculos_placa` varchar(7) NOT NULL,
+  `status` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `registros`
---
-
-INSERT INTO `registros` (`idregistro`, `entrada`, `saida`, `valor`, `veiculos_placa`) VALUES
-(1, '2019-06-13 01:57:28', NULL, NULL, 'ITG3555'),
-(2, '2019-06-13 02:23:30', NULL, NULL, 'ABK1412');
 
 -- --------------------------------------------------------
 
@@ -169,7 +162,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT for table `registros`
 --
 ALTER TABLE `registros`
-  MODIFY `idregistro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idregistro` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `usuarios`

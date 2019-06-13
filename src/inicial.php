@@ -1,15 +1,29 @@
-<!doctype html>
-<html lang="pt-br">
-<head>
-  <?php require_once "header-admin.php" ?>
-  <?php include('database_functions.php');
+<?php 
   session_start();
   if ((!isset($_SESSION['nome']) == true)) {
     unset($_SESSION['nome']);
     header('location:index.php');
   }
-  $login =  $_SESSION['nome'];
 
+  $login =  $_SESSION['nome'];
+  $perfil =  $_SESSION['perfil'];
+
+  ?>
+
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <?php 
+
+  //Carrega perfil
+  if($perfil == "Administrador"){ 
+    require_once "header-admin.php";
+  }elseif ($perfil == "Funcionário") {
+    require_once "header-func.php";
+  }
+
+  include('database_functions.php');
+  
   $pdo = connect_to_database("park");
 
   $sql1 = "SELECT idcliente, nome, placa, modelo, cor  FROM veiculos JOIN clientes ON clientes.idcliente = veiculos.clientes_idcliente";
@@ -26,9 +40,7 @@
   <body>
     <div class="container bg-dark text-white mt-2 mb-2 pb-2">
     
-    <?php
-      echo $login;
-    ?>
+    <!-- <?php echo "$perfil $login"; ?> -->
 
       <div class="pull-right">
         <button type="button" class="btn btn-xs btn-success mt-2 mb-2" data-toggle="modal" data-target="#ModalNovoReg">Novo Registro</button>
@@ -78,25 +90,31 @@
             </thead>
             <tbody>
               <?php while ($rowReg = $registros->fetch()) { ?>
-                <tr>
-                  <td class="align-middle"><?php echo $rowReg['idregistro']; ?></td>
-                  <td class="align-middle"><?php echo $rowReg['placa'];
-                                            echo "<br>";
-                                            echo $rowReg['marca'];
-                                            echo "<br>";
-                                            echo $rowReg['modelo'];
-                                            echo "<br>";
-                                            echo $rowReg['cor']; ?></td>
-                  <td class="align-middle"><?php echo $rowReg['entrada'];
-                                            echo "<br>";
-                                            echo $rowReg['saida'];
-                                            ?></td>
-                  <td class="align-middle"><?php echo $rowReg['valor']; ?></td>
-                  <td class="align-middle">
-                    <a href="insere-saida.php?idregistro=<?php echo $rowReg['idregistro']; ?>"><button type="button" class="btn btn-xs btn-primary"> <img src="open-iconic/png/clock-2x.png"> </button></a>
-                    <a href="delete-veic.php?placa=<?php echo $rowReg['placa']; ?>"><button type="button" class="btn btn-xs btn-warning"> <img src="open-iconic/png/give-money.png"> </button></a>
-                  </td>
-                </tr>
+                <?php if($rowReg['status'] == "Estacionado" || $rowReg['status'] == "Saindo"){ ?>
+                
+                  <tr>
+                    <td class="align-middle"><?php echo $rowReg['idregistro']; ?></td>
+                    <td class="align-middle"><?php echo $rowReg['placa'];
+                                              echo "<br>";
+                                              echo $rowReg['marca'];
+                                              echo "<br>";
+                                              echo $rowReg['modelo'];
+                                              echo "<br>";
+                                              echo $rowReg['cor']; ?></td>
+                    <td class="align-middle"><?php echo $rowReg['entrada'];
+                                              echo "<br>";
+                                              echo $rowReg['saida'];
+                                              ?></td>
+                    <td class="align-middle"><?php echo $rowReg['status']; 
+                                              echo "<br>";
+                                              echo $rowReg['valor'];
+                                              ?></td>
+                    <td class="align-middle">
+                      <a href="insere-saida.php?idregistro=<?php echo $rowReg['idregistro']; ?>"><button type="button" class="btn btn-xs btn-primary"> <img src="open-iconic/png/clock-2x.png" > </button></a>
+                      <a href="insere-pagamento.php?idregistro=<?php echo $rowReg['idregistro']; ?>"><button type="button" class="btn btn-xs btn-warning" style="width: 43px"> <img src="open-iconic/png/give-money.png"> </button></a>
+                    </td>
+                  </tr>
+                <?php } ?>
               <?php } ?>
             </tbody>
           </table>
