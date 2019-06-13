@@ -1,9 +1,0 @@
-$my-color-1: tomato;
-
-$theme-colors:(
-    "my-color-1": $my-color-1
-);
-
-//importar o Bootstrap
-@import "../../node_modules/bootstrap/scss/bootstrap.scss"
-

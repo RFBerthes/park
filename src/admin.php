@@ -1,33 +1,34 @@
-<?php
-include('database_functions.php');
-session_start();
-if ((!isset($_SESSION['nome']) == true)) {
-  unset($_SESSION['nome']);
-  header('location:index.php');
-}
-$login =  $_SESSION['nome'];
-
-
-$pdo = connect_to_database("park");
-
-$sql1 = "SELECT idcliente, nome, placa, modelo, cor  FROM veiculos JOIN clientes ON clientes.idcliente = veiculos.clientes_idcliente";
-$sql2 = "SELECT * FROM clientes";
-$veiculos = $pdo->query($sql1);
-
-
-?>
 <!doctype html>
 <html lang="pt-br">
-
 <head>
   <?php require_once "header-admin.php" ?>
+  <?php include('database_functions.php');
+  session_start();
+  if ((!isset($_SESSION['nome']) == true)) {
+    unset($_SESSION['nome']);
+    header('location:index.php');
+  }
+  $login =  $_SESSION['nome'];
+
+  $pdo = connect_to_database("park");
+
+  $sql1 = "SELECT idcliente, nome, placa, modelo, cor  FROM veiculos JOIN clientes ON clientes.idcliente = veiculos.clientes_idcliente";
+  $sql2 = "SELECT * FROM registros JOIN veiculos ON veiculos.placa = registros.veiculos_placa";
+  $veiculos = $pdo->query($sql1);
+  $registros = $pdo->query($sql2);
+
+
+  ?>
+  
 
 </head>
 
-<body>
-
   <body>
     <div class="container bg-dark text-white mt-2 mb-2 pb-2">
+    
+    <?php
+      echo $login;
+    ?>
 
       <div class="pull-right">
         <button type="button" class="btn btn-xs btn-success mt-2 mb-2" data-toggle="modal" data-target="#ModalNovoReg">Novo Registro</button>
@@ -71,23 +72,29 @@ $veiculos = $pdo->query($sql1);
                 <th>Nº</th>
                 <th>Veiculo</th>
                 <th>Entrada/Saídas</th>
+                <th>Valor (R$)</th>
                 <th>Ação</th>
               </tr>
             </thead>
             <tbody>
-              <?php while ($row = $veiculos->fetch()) { ?>
+              <?php while ($rowReg = $registros->fetch()) { ?>
                 <tr>
-                  <td class="align-middle"><?php echo $row['idregistro']; ?></td>
-                  <td class="align-middle"><?php echo $row['placa'];
+                  <td class="align-middle"><?php echo $rowReg['idregistro']; ?></td>
+                  <td class="align-middle"><?php echo $rowReg['placa'];
                                             echo "<br>";
-                                            echo $row['marca'];
+                                            echo $rowReg['marca'];
                                             echo "<br>";
-                                            echo $row['modelo'];
+                                            echo $rowReg['modelo'];
                                             echo "<br>";
-                                            echo $row['cor']; ?></td>
+                                            echo $rowReg['cor']; ?></td>
+                  <td class="align-middle"><?php echo $rowReg['entrada'];
+                                            echo "<br>";
+                                            echo $rowReg['saida'];
+                                            ?></td>
+                  <td class="align-middle"><?php echo $rowReg['valor']; ?></td>
                   <td class="align-middle">
-                    <button type="button" data-toggle="modal" class="btn btn-xs btn-warning" data-target="#editModal" data-whatever="<?php echo $row['placa']; ?>"> <img src="open-iconic/png/pencil-2x.png"> </button>
-                    <a href="delete-veic.php?placa=<?php echo $row['placa']; ?>"><button type="button" class="btn btn-xs btn-danger"> <img src="open-iconic/png/trash-2x.png"> </button></a>
+                    <a href="insere-saida.php?placa=<?php echo $rowReg['placa']; ?>"><button type="button" class="btn btn-xs btn-primary"> <img src="open-iconic/png/clock-2x.png"> </button></a>
+                    <a href="delete-veic.php?placa=<?php echo $rowReg['placa']; ?>"><button type="button" class="btn btn-xs btn-warning"> <img src="open-iconic/png/give-money.png"> </button></a>
                   </td>
                 </tr>
               <?php } ?>

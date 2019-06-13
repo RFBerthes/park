@@ -42,12 +42,6 @@
       </ul>
 
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <?php
-            echo $login;
-          ?>
-
-        </li>
         <li class="nav-item ">
           <a class="nav-link" href="logout.php">SAIR</a>
         </li>
