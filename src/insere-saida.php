@@ -2,19 +2,20 @@
 
 include('database_functions.php');
 
-$placa = $_POST['placa'];
+$idregistro = $_GET['idregistro'];
 
-//echo $placa; exit;
+
+//echo $idregistro; exit;
 
 $pdo = connect_to_database("park");
-cd p
-$sql_ins = "INSERT INTO registros (entrada, saida, valor, veiculos_placa) VALUES (CURRENT_TIMESTAMP, NULL, NULL, :placa)";
-$stmt_ins = $pdo->prepare($sql_ins);
-$stmt_ins->bindParam(':placa', $placa);
+
+$sql_upd = "UPDATE registros SET saida = CURRENT_TIMESTAMP WHERE registros.idregistro = :idregistro";
+$stmt_upd = $pdo->prepare($sql_upd);
+$stmt_upd->bindParam(':idregistro', $idregistro);
 
 try {
-        $stmt_ins->execute();
-        if ($stmt_ins->rowCount() == 0) {
+        $stmt_upd->execute();
+        if ($stmt_upd->rowCount() == 0) {
             header("Location: admin.php?erro");
         } else {
             header("Location: admin.php?sucesso");

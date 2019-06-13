@@ -71,7 +71,7 @@
               <tr>
                 <th>Nº</th>
                 <th>Veiculo</th>
-                <th>Entrada/Saídas</th>
+                <th>Entrada<br>Saída</th>
                 <th>Valor (R$)</th>
                 <th>Ação</th>
               </tr>
@@ -93,7 +93,7 @@
                                             ?></td>
                   <td class="align-middle"><?php echo $rowReg['valor']; ?></td>
                   <td class="align-middle">
-                    <a href="insere-saida.php?placa=<?php echo $rowReg['placa']; ?>"><button type="button" class="btn btn-xs btn-primary"> <img src="open-iconic/png/clock-2x.png"> </button></a>
+                    <a href="insere-saida.php?idregistro=<?php echo $rowReg['idregistro']; ?>"><button type="button" class="btn btn-xs btn-primary"> <img src="open-iconic/png/clock-2x.png"> </button></a>
                     <a href="delete-veic.php?placa=<?php echo $rowReg['placa']; ?>"><button type="button" class="btn btn-xs btn-warning"> <img src="open-iconic/png/give-money.png"> </button></a>
                   </td>
                 </tr>
