@@ -34,7 +34,7 @@
           <a class="nav-link" href="usuarios.php" id="home">USUÁRIOS <span class="sr-only">(página atual)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="relatorios.php">RELATÓRIOS</a>
+          <a class="nav-link " href="relatorios.php">RELATÓRIO</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#">BACKUP</a>

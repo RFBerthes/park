@@ -1,19 +1,32 @@
-<?php
-  session_start();
-  include('database_functions.php');
-
-  $pdo = connect_to_database("park");
-
-  $sql1 = "SELECT * FROM usuarios";
-  // $sql2 = "SELECT * FROM clientes";
-  $usuarios = $pdo->query($sql1);
-  // $clientes = $pdo->query($sql2);
-
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
-    <?php require_once "header-admin.php" ?>
+    <?php 
+      session_start();
+      if ((!isset($_SESSION['nome']) == true)) {
+        unset($_SESSION['nome']);
+        header('location:index.php');
+      }
+      $login =  $_SESSION['nome'];
+      $perfil =  $_SESSION['perfil'];
+
+      //Carrega perfil
+      if ($perfil == "Administrador") {
+        require_once "header-admin.php";
+      } elseif ($perfil == "Funcionário") {
+        require_once "header-func.php";
+      }
+      include('database_functions.php');
+    
+      $pdo = connect_to_database("park");
+    
+      $sql1 = "SELECT * FROM usuarios";
+      // $sql2 = "SELECT * FROM clientes";
+      $usuarios = $pdo->query($sql1);
+      // $clientes = $pdo->query($sql2);
+    
+
+    ?>
   </head>
   <body>
       <div class="container bg-dark text-white mt-2 mb-2">

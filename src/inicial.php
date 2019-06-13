@@ -1,4 +1,11 @@
 <?php 
+
+  ?>
+
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <?php 
   session_start();
   if ((!isset($_SESSION['nome']) == true)) {
     unset($_SESSION['nome']);
@@ -7,14 +14,7 @@
 
   $login =  $_SESSION['nome'];
   $perfil =  $_SESSION['perfil'];
-
-  ?>
-
-<!doctype html>
-<html lang="pt-br">
-<head>
-  <?php 
-
+  
   //Carrega perfil
   if($perfil == "Administrador"){ 
     require_once "header-admin.php";
@@ -23,7 +23,6 @@
   }
 
   include('database_functions.php');
-  
   $pdo = connect_to_database("park");
 
   $sql1 = "SELECT idcliente, nome, placa, modelo, cor  FROM veiculos JOIN clientes ON clientes.idcliente = veiculos.clientes_idcliente";

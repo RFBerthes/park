@@ -1,21 +1,28 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-  <?php require_once "header-admin.php" ?>
-  <?php include('database_functions.php');
-  session_start();
-  if ((!isset($_SESSION['nome']) == true)) {
-    unset($_SESSION['nome']);
-    header('location:index.php');
-  }
-  $login =  $_SESSION['nome'];
+  <?php
+    session_start();
+    include('database_functions.php');
+    $pdo = connect_to_database("park");
+    if ((!isset($_SESSION['nome']) == true)) {
+      unset($_SESSION['nome']);
+      header('location:index.php');
+    }
+    $login =  $_SESSION['nome'];
+    $perfil =  $_SESSION['perfil'];
 
-  $pdo = connect_to_database("park");
+    //Carrega perfil
+    if ($perfil == "Administrador") {
+      require_once "header-admin.php";
+    } elseif ($perfil == "Funcionário") {
+      require_once "header-func.php";
+    }
 
-  $sql1 = "SELECT idcliente, nome, placa, modelo, cor  FROM veiculos JOIN clientes ON clientes.idcliente = veiculos.clientes_idcliente";
-  $sql2 = "SELECT * FROM registros JOIN veiculos ON veiculos.placa = registros.veiculos_placa";
-  $veiculos = $pdo->query($sql1);
-  $registros = $pdo->query($sql2);
+    $sql1 = "SELECT idcliente, nome, placa, modelo, cor  FROM veiculos JOIN clientes ON clientes.idcliente = veiculos.clientes_idcliente";
+    $sql2 = "SELECT * FROM registros JOIN veiculos ON veiculos.placa = registros.veiculos_placa";
+    $veiculos = $pdo->query($sql1);
+    $registros = $pdo->query($sql2);
 
 
   ?>

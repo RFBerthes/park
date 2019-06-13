@@ -16,9 +16,9 @@ $stmt_upd->bindParam(':idregistro', $idregistro);
 try {
         $stmt_upd->execute();
         if ($stmt_upd->rowCount() == 0) {
-            header("Location: admin.php?erro");
+            header("Location: inicial.php?erro");
         } else {
-            header("Location: admin.php?sucesso");
+            header("Location: inicial.php?sucesso");
         }
         
     
